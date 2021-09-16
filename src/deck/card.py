@@ -10,7 +10,7 @@ class Card:
     @staticmethod
     def _validate_rank(rank: str):
         rank = rank.lower()
-        valid_ranks = ["ace", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king"]
+        valid_ranks = ["ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king"]
         if rank in valid_ranks:
             return rank
         raise ValueError()
@@ -26,7 +26,6 @@ class Card:
     def info(self):
         spoken_ranks = {
             "ace": "ace",
-            "1": "one",
             "2": "two",
             "3": "three",
             "4": "four",
