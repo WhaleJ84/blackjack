@@ -5,7 +5,7 @@ class Card:
     def __init__(self, rank: str, suit: str):
         self.rank = self._validate_rank(rank)
         self.suit = self._validate_suit(suit)
-        self.unicode = lookup(f"PLAYING CARD {self.info().upper()}")
+        self.unicode = lookup(f"PLAYING CARD {self.spoken_value().upper()}")
 
     @staticmethod
     def _validate_rank(rank: str):
@@ -23,7 +23,7 @@ class Card:
             return suit
         raise ValueError()
 
-    def info(self):
+    def spoken_value(self):
         spoken_ranks = {
             "ace": "ace",
             "2": "two",
