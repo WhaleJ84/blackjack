@@ -16,7 +16,7 @@ class Card:
         raise ValueError()
 
     @staticmethod
-    def _validate_suit(suit):
+    def _validate_suit(suit: str):
         suit = suit.lower()
         valid_suits = ["clubs", "diamonds", "hearts", "spades"]
         if suit in valid_suits:
