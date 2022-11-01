@@ -23,6 +23,7 @@ class Game:
             Player('Dealer', True)
         ]
         self.max_score = 0
+        self.active = True
 
     @staticmethod
     def _initialise_deck():
@@ -46,6 +47,8 @@ class Game:
                 participant.score += card._values[card.rank]
         if participant.score > self.max_score:
             self.max_score = participant.score
+        if self.max_score > 21:
+            self.active = False
 
     def draw_cards(self, participant):
         if len(participant.hand) == 0:
@@ -58,14 +61,20 @@ class Game:
     def prompt_player(self, participant):
         if not participant.is_dealer:
             print(participant.status())
-            participant.action = input("Raise or Hold? ").lower()
-            if "r" in list(participant.action):
+            participant.action = input("Raise or Hold? [R/h]: ").lower()
+            if "r" in list(participant.action) or participant.action == "":
+                participant.action = "raise"
                 self.draw_cards(participant)
+            else:
+                participant.action = "hold"
         else:
             if participant.score <= 17:
                 self.draw_cards(participant)
             else:
-                participant.action = "hold"
+                if self.players[0].action == "hold":
+                    self.active = False
+                else:
+                    participant.action = "hold"
 
 
 if __name__ == '__main__':
@@ -74,10 +83,10 @@ if __name__ == '__main__':
     for player in blackjack.players:
         blackjack.draw_cards(player)
 
-    while blackjack.max_score < 21:
+    while blackjack.active:
         for player in blackjack.players:
             player.action = ""
-            while "h" not in list(player.action) and player.score < 21:
+            while player.action != "hold" and blackjack.active:
                 blackjack.prompt_player(player)
 
     print("END GAME")
