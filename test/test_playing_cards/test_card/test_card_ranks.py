@@ -1,4 +1,4 @@
-from test.test_deck.test_card import CardTestCase
+from test.test_playing_cards.test_card import CardTestCase
 
 
 class CardRanksTestCase(CardTestCase):

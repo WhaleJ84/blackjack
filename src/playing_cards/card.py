@@ -6,6 +6,25 @@ class Card:
         self.rank = self._validate_rank(rank)
         self.suit = self._validate_suit(suit)
         self.unicode = lookup(f"PLAYING CARD {self.spoken_value().upper()}")
+        # Not an attribute of a card. Move elsewhere
+        self._values = {
+            "ace": [11, 1],
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "jack": 10,
+            "queen": 10,
+            "king": 10
+        }
+
+    def __repr__(self) -> str:
+        return f"{self.unicode} {self.spoken_value()}"
 
     @staticmethod
     def _validate_rank(rank: str):
